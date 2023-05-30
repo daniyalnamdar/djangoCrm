@@ -1,0 +1,58 @@
+{%  extends 'accounts/main.html' %}
+
+{% block content %}
+
+		<br>
+
+		<div class="row p-5">
+			<div class="col-md">
+				<div class="card card-body">
+					<h5>Products</h5>
+				</div>
+				<div class="card card-body h-500px">
+					<table class="table">
+						<tr>
+							<th>Product</th>
+							<th>Category</th>
+							<th>Price</th>
+						</tr>
+						{% for i in products %}
+						<tr>
+						<td>{{i.name}}</td>
+						<td>{{i.category}}</td>
+						<td>{{i.price}}</td>
+						</tr>
+						{% endfor %}
+
+					
+					</table>
+				</div>
+			</div>
+			
+		</div>
+
+		{% if products.has_other_pages %}
+			<nav aria-label="Page navigation example page-nav" style="padding-left: 40%;">
+				<ul class="pagination page-nav">
+					{% if products.has_previous %}
+					<li class="page-item page-nav"><a class="page-link" href="?page={{products.previous_page_number}}">&#10094; Prev</a></li>
+					{% endif %}
+				
+					{% for page in custom_range %}
+
+						{% if page == products.number %}
+							<li class="page-item page-nav"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+						{% else %}
+							<li class="page-item page-nav"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+						{% endif %}	
+					{% endfor %}
+
+					{% if products.has_next %}
+						<li class="page-item page-nav"><a class="page-link" href="?page={{products.next_page_number}}"> Next &#10095; </a></li>
+					{% endif %}    
+				</ul>
+			</nav>
+		{% endif %}
+		
+		{% endblock content %}
+
